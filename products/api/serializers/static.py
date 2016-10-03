@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" Static serializers. """
+"""Static serializers."""
 
 from rest_framework import serializers
 

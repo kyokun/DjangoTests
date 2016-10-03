@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" API urls """
+"""API urls."""
 
 from django.conf.urls import url, include
 

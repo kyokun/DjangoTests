@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" Static views. """
+"""Static views."""
 
 from rest_framework import viewsets
 
