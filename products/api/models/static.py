@@ -26,4 +26,4 @@ class State(models.Model):
 class Category(models.Model):
     """Category model."""
     name = models.CharField(max_length=30)
-    status = models.BooleanField
+    status = models.BooleanField(null=False, default=False)
