@@ -24,6 +24,6 @@ setup(
     author_email="helloworld@lnphi.com",
     description=(""),
     license="FIXME: TBD",
-    packages=["Test"],
+    packages=["products"],
     install_requires=[],
 )
