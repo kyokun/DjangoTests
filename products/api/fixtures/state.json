@@ -1,0 +1,173 @@
+[
+  {
+    "model": "api.state",
+    "pk": 1,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 2,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 3,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 4,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 5,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 6,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 7,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 8,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 9,
+    "fields": {
+      "country": 1,
+      "name": "EDOMEX",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 10,
+    "fields": {
+      "country": 1,
+      "name": "agua",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 11,
+    "fields": {
+      "country": 1,
+      "name": "sinaloa",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 12,
+    "fields": {
+      "country": 1,
+      "name": "aguascalientes",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 13,
+    "fields": {
+      "country": 1,
+      "name": "sonora",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 14,
+    "fields": {
+      "country": 1,
+      "name": "chihuahua",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 15,
+    "fields": {
+      "country": 1,
+      "name": "colima",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 16,
+    "fields": {
+      "country": 1,
+      "name": "nayarit",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 17,
+    "fields": {
+      "country": 1,
+      "name": "quintana roo",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 18,
+    "fields": {
+      "country": 1,
+      "name": "chiapas",
+      "code": "55"
+    }
+  },
+  {
+    "model": "api.state",
+    "pk": 19,
+    "fields": {
+      "country": 1,
+      "name": "oaxaca",
+      "code": "55"
+    }
+  }
+]
