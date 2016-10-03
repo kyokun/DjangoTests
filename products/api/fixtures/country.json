@@ -1,0 +1,11 @@
+[
+  {
+    "model": "api.country",
+    "pk": 1,
+    "fields": {
+      "phone_code": "+52",
+      "code": "MX",
+      "name": "México"
+    }
+  }
+]

@@ -13,7 +13,7 @@ class Country(models.Model):
     """Country model."""
     phone_code = models.CharField(max_length=5, null=True)
     code = models.CharField(max_length=2)
-    name = models.CharField(max_length=5)
+    name = models.CharField(max_length=32)
 
 
 class State(models.Model):
