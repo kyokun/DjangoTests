@@ -1,0 +1,24 @@
+# Definición del ambiente virtual de travis. Aquí se define el lenguaje
+# del interprete a correr (python), su versión (2.7). De igual manera, se inicializan
+# las variables de entorno y se definen los comandos a correr
+# TODO: Add coveralls
+branches:
+  only:
+    - master
+
+language: python
+
+python:
+      - "2.7"
+
+env:
+    TOXENV=py27
+
+install:
+    - pip install tox
+
+script:
+    tox
+
+after_success:
+    coveralls
