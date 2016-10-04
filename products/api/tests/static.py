@@ -9,7 +9,7 @@ from rest_framework.test import APITestCase
 from api.models import Category
 
 
-class CategoryTests(APITestCase):
+class TestCategory(APITestCase):
     """Category tests."""
     fixtures = ['category']
 
