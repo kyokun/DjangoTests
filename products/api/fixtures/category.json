@@ -3,35 +3,40 @@
     "model": "api.category",
     "pk": 1,
     "fields": {
-      "name": "1"
+      "name": "1",
+      "status": false
     }
   },
   {
     "model": "api.category",
     "pk": 2,
     "fields": {
-      "name": "2"
+      "name": "2",
+      "status": false
     }
   },
   {
     "model": "api.category",
     "pk": 3,
     "fields": {
-      "name": "3"
+      "name": "3",
+      "status": false
     }
   },
   {
     "model": "api.category",
     "pk": 4,
     "fields": {
-      "name": "4"
+      "name": "4",
+      "status": false
     }
   },
   {
     "model": "api.category",
     "pk": 5,
     "fields": {
-      "name": "5"
+      "name": "5",
+      "status": false
     }
   }
 ]

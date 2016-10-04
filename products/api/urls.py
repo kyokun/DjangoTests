@@ -14,8 +14,6 @@ router.register(r'countries', CountryViewSet)
 router.register(r'states', StateViewSet)
 router.register(r'categories', CategoryViewSet)
 
-app_name = 'api'
-
 urlpatterns = [
     url(r'^', include(router.urls)),
 ]
