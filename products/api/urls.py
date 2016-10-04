@@ -8,7 +8,6 @@ from rest_framework import routers
 from api.views import (IndustryViewSet, CountryViewSet, StateViewSet,
                        CategoryViewSet, UserProfileViewSet)
 
-
 router = routers.DefaultRouter()
 router.register(r'industries', IndustryViewSet)
 router.register(r'countries', CountryViewSet)
