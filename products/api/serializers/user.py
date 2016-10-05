@@ -2,7 +2,6 @@
 """User serializers."""
 
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import serializers
 
@@ -11,17 +10,19 @@ from api.models.user import UserProfile
 
 class UserSerializer(serializers.ModelSerializer):
     """User serializer."""
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    email = serializers.EmailField()
     password = serializers.CharField(
         style={'input_type': 'password'},
         max_length=User._meta.get_field('password').max_length,
-        min_length=6)
+        min_length=6, write_only=True)
     password_confirmation = serializers.CharField(
-        style={'input_type': 'password'})
-    email = serializers.EmailField
+        style={'input_type': 'password'}, write_only=True)
 
     class Meta:
         model = User
-        fields = ('pk', 'first_name', 'last_name', 'email', 'password',
+        fields = ('first_name', 'last_name', 'email', 'password',
                   'password_confirmation',)
 
     def validate_email(self, attrs):
@@ -46,54 +47,30 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-    def to_representation(self, instance):
-        return {'pk': instance.pk, 'first_name': instance.first_name,
-                'last_name': instance.last_name, 'email': instance.email}
 
-
-class UserProfileSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(UserSerializer):
     """User profile serializer."""
-    pk = serializers.PrimaryKeyRelatedField(read_only=True)
-    first_name = serializers.CharField(write_only=True, max_length=User._meta.get_field('first_name').max_length)
-    last_name = serializers.CharField(write_only=True, max_length=User._meta.get_field('last_name').max_length)
-    email = serializers.EmailField(write_only=True)
-    password = serializers.CharField(write_only=True, min_length=6,
-                                     max_length=User._meta.get_field('password').max_length,
-                                     style={'input_type': 'password'})
-    password_confirmation = serializers.CharField(write_only=True, style={'input_type': 'password'})
     phone = serializers.CharField(min_length=8, max_length=10)
 
     class Meta:
         model = UserProfile
-        fields = ('pk', 'first_name', 'last_name', 'email', 'password', 'password_confirmation', 'phone', 'role',)
+        fields = ('phone', 'role', 'first_name', 'last_name', 'email',
+                  'password', 'password_confirmation')
 
     def create(self, validated_data):
-        user = dict()
-        user['first_name'] = validated_data.pop('first_name')
-        user['last_name'] = validated_data.pop('last_name')
-        user['email'] = validated_data.pop('email')
-        user['password'] = validated_data.pop('password')
-        user['password_confirmation'] = validated_data.pop('password_confirmation')
-        profile = UserProfile(**validated_data)
-        user['profile'] = profile
-        serializer = UserSerializer(data=user)
-
-        if serializer.is_valid():
-            serializer.save()
-            profile.save()
-            return profile
-        else:
-            raise serializers.ValidationError(serializer.errors)
+        profile_data = {}
+        profile_data['phone'] = validated_data.pop('phone')
+        profile_data['role'] = validated_data.pop('role')
+        validated_data.pop('password_confirmation')
+        validated_data['username'] = validated_data.get('email', None)
+        user = User.objects.create(**validated_data)
+        user.profile.role = profile_data['role']
+        user.profile.phone = profile_data['phone']
+        user.save()
+        return user.profile
 
     def to_representation(self, instance):
-        try:
-            user = instance.user
-            return {
-                'first_name': user.first_name, 'last_name': user.last_name,
-                'email': user.email, 'phone': instance.phone,
-                'role': instance.role, 'id': instance.pk
-            }
-        except ObjectDoesNotExist:
-            return {
-                'id': instance.pk, 'phone': instance.phone, 'role': instance.role
-            }
+        return {
+            'first_name': instance.user.first_name,
+            'last_name': instance.user.last_name, 'email': instance.user.email,
+            'phone': instance.phone, 'role': instance.role}

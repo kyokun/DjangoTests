@@ -2,7 +2,9 @@
 """User models."""
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
+from django.dispatch import receiver
 
 from api.models import Country
 
@@ -23,3 +25,14 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 primary_key=True, related_name='profile',
                                 on_delete=models.CASCADE)
+
+
+@receiver(models.signals.post_save, sender=User)
+def save_profile(sender, instance, update_fields, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+@receiver(models.signals.post_save, sender=User)
+def create_profile(sender, instance, update_fields, **kwargs):
+    instance.profile.save()
