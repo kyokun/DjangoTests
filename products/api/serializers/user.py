@@ -2,23 +2,11 @@
 """User serializers."""
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import serializers
 
 from api.models.user import UserProfile
-
-
-def create_user(user_data, profile=None):
-    print(user_data)
-    user_data['username'] = user_data['email']
-    user_data.pop('password_confirmation')
-    if profile is not None:
-        user = User.objects.create(profile=profile, **user_data)
-    else:
-        user = User.objects.create(**user_data)
-    user.set_password(user_data['password'])
-    user.save()
-    return user
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -51,7 +39,12 @@ class UserSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        return create_user(validated_data)
+        validated_data['username'] = validated_data['email']
+        validated_data.pop('password_confirmation')
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
     def to_representation(self, instance):
         return {'pk': instance.pk, 'first_name': instance.first_name,
@@ -60,15 +53,47 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     """User profile serializer."""
-    user = UserSerializer(many=False)
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
+    first_name = serializers.CharField(write_only=True, max_length=User._meta.get_field('first_name').max_length)
+    last_name = serializers.CharField(write_only=True, max_length=User._meta.get_field('last_name').max_length)
+    email = serializers.EmailField(write_only=True)
+    password = serializers.CharField(write_only=True, min_length=6,
+                                     max_length=User._meta.get_field('password').max_length,
+                                     style={'input_type': 'password'})
+    password_confirmation = serializers.CharField(write_only=True, style={'input_type': 'password'})
     phone = serializers.CharField(min_length=8, max_length=10)
 
     class Meta:
         model = UserProfile
-        fields = ('user', 'phone', 'role',)
+        fields = ('pk', 'first_name', 'last_name', 'email', 'password', 'password_confirmation', 'phone', 'role',)
 
     def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        profile = UserProfile.objects.create(**validated_data)
-        create_user(user_data, profile=profile)
-        return profile
+        user = dict()
+        user['first_name'] = validated_data.pop('first_name')
+        user['last_name'] = validated_data.pop('last_name')
+        user['email'] = validated_data.pop('email')
+        user['password'] = validated_data.pop('password')
+        user['password_confirmation'] = validated_data.pop('password_confirmation')
+        profile = UserProfile(**validated_data)
+        user['profile'] = profile
+        serializer = UserSerializer(data=user)
+
+        if serializer.is_valid():
+            serializer.save()
+            profile.save()
+            return profile
+        else:
+            raise serializers.ValidationError(serializer.errors)
+
+    def to_representation(self, instance):
+        try:
+            user = instance.user
+            return {
+                'first_name': user.first_name, 'last_name': user.last_name,
+                'email': user.email, 'phone': instance.phone,
+                'role': instance.role, 'id': instance.pk
+            }
+        except ObjectDoesNotExist:
+            return {
+                'id': instance.pk, 'phone': instance.phone, 'role': instance.role
+            }
