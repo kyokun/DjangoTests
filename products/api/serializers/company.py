@@ -9,6 +9,7 @@ from api.models.company import Company
 
 class AddressSerializer(serializers.ModelSerializer):
     """Address serializer."""
+
     class Meta:
         model = Company
         fields = ('street', 'country', 'num_ext', 'zip_code', 'state',)
@@ -33,10 +34,11 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('id', 'business_name', 'website', 'industry',
                   'product_categories', 'address', 'main_phone',)
 
-    def create(self, validated_data):
-        categories = validated_data.pop('product_categories')
-        company = Company.objects.create(**validated_data)
-        for category in categories:
-            company.product_categories.add(category)
-        company.save()
-        return company
+
+def create(self, validated_data):
+    categories = validated_data.pop('product_categories')
+    company = Company.objects.create(**validated_data)
+    for category in categories:
+        company.product_categories.add(category)
+    company.save()
+    return company
