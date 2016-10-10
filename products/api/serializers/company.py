@@ -7,14 +7,11 @@ from api.models.static import Country, State
 from api.models.company import Company
 
 
-class AddressSerializer(serializers.Serializer):
+class AddressSerializer(serializers.ModelSerializer):
     """Address serializer."""
-    street = serializers.CharField(max_length=100)
-    num_ext = serializers.CharField(max_length=10)
-    zip_code = serializers.CharField(max_length=8)
-    state = serializers.PrimaryKeyRelatedField(queryset=State.objects.all())
-    country = serializers.PrimaryKeyRelatedField(
-        queryset=Country.objects.all())
+    class Meta:
+        model = Company
+        fields = ('street', 'country', 'num_ext', 'zip_code', 'state',)
 
 
 class MainPhoneSerializer(serializers.Serializer):
@@ -33,7 +30,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('business_name', 'website', 'industry',
+        fields = ('id', 'business_name', 'website', 'industry',
                   'product_categories', 'address', 'main_phone',)
 
     def create(self, validated_data):
