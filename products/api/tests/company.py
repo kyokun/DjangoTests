@@ -16,7 +16,8 @@ categories = [1, 2, 4]
 
 class TestCompany(APITestCase):
     """Company tests."""
-    fixtures = ['category', 'country', 'industry', 'state', 'api/tests/fixtures/company']
+    fixtures = ['category', 'country', 'industry', 'state',
+                'api/tests/fixtures/company']
 
     def test_get_companies(self):
         """Ensure we can retrieve all company objects."""
