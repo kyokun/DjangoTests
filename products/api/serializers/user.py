@@ -10,9 +10,6 @@ from api.models.user import UserProfile
 
 class UserSerializer(serializers.ModelSerializer):
     """User serializer."""
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
-    email = serializers.EmailField()
     password = serializers.CharField(
         style={'input_type': 'password'},
         max_length=User._meta.get_field('password').max_length,
@@ -44,33 +41,36 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data.pop('password_confirmation')
         user = User.objects.create(**validated_data)
         user.set_password(validated_data['password'])
-        user.save()
+        user.save(update_fields=['password'])
         return user
 
 
 class UserProfileSerializer(UserSerializer):
     """User profile serializer."""
+    first_name = serializers.CharField(max_length=User._meta.get_field('first_name').max_length)
+    last_name = serializers.CharField(max_length=User._meta.get_field('last_name').max_length)
+    email = serializers.EmailField()
     phone = serializers.CharField(min_length=8, max_length=10)
 
     class Meta:
         model = UserProfile
-        fields = ('phone', 'role', 'first_name', 'last_name', 'email',
-                  'password', 'password_confirmation')
+        fields = UserSerializer.Meta.fields + ('phone', 'role',)
 
     def create(self, validated_data):
         profile_data = {}
         profile_data['phone'] = validated_data.pop('phone')
         profile_data['role'] = validated_data.pop('role')
-        validated_data.pop('password_confirmation')
-        validated_data['username'] = validated_data.get('email', None)
-        user = User.objects.create(**validated_data)
+        user = super(UserProfileSerializer, self).create(validated_data)
         user.profile.role = profile_data['role']
         user.profile.phone = profile_data['phone']
-        user.save()
+        user.profile.save(update_fields=['role', 'phone'])
         return user.profile
 
     def to_representation(self, instance):
         return {
             'first_name': instance.user.first_name,
-            'last_name': instance.user.last_name, 'email': instance.user.email,
-            'phone': instance.phone, 'role': instance.role}
+            'last_name': instance.user.last_name,
+            'email': instance.user.email,
+            'phone': instance.phone,
+            'role': instance.role
+        }

@@ -31,8 +31,3 @@ class UserProfile(models.Model):
 def save_profile(sender, instance, update_fields, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-
-
-@receiver(models.signals.post_save, sender=User)
-def create_profile(sender, instance, update_fields, **kwargs):
-    instance.profile.save()
