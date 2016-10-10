@@ -64,7 +64,8 @@ class ProductSerializer(serializers.ModelSerializer):
         for attribute in attributes:
             product.attributes.add(attribute)
         extra_info = ProductExtraInfo.objects.get(product_id=product.id)
-        extra_info.title, extra_info.description = extra_info_data
+        extra_info.title = extra_info_data.get('title')
+        extra_info.description = extra_info_data.get('description')
         extra_info.save(update_fields=['title', 'description'])
         return product
 
