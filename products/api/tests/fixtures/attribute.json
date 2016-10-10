@@ -1,0 +1,37 @@
+[
+  {
+    "model": "api.attribute",
+    "pk": 1,
+    "fields": {
+      "name": "material"
+    }
+  },
+  {
+    "model": "api.attribute",
+    "pk": 2,
+    "fields": {
+      "name": "color"
+    }
+  },
+  {
+    "model": "api.attribute",
+    "pk": 3,
+    "fields": {
+      "name": "peso"
+    }
+  },
+  {
+    "model": "api.attribute",
+    "pk": 4,
+    "fields": {
+      "name": "alto"
+    }
+  },
+  {
+    "model": "api.attribute",
+    "pk": 5,
+    "fields": {
+      "name": "ancho"
+    }
+  }
+]
