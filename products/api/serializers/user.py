@@ -47,8 +47,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(UserSerializer):
     """User profile serializer."""
-    first_name = serializers.CharField(max_length=User._meta.get_field('first_name').max_length)
-    last_name = serializers.CharField(max_length=User._meta.get_field('last_name').max_length)
+    first_name = serializers.CharField(
+        max_length=User._meta.get_field('first_name').max_length)
+    last_name = serializers.CharField(
+        max_length=User._meta.get_field('last_name').max_length)
     email = serializers.EmailField()
     phone = serializers.CharField(min_length=8, max_length=10)
 
