@@ -3,7 +3,7 @@
 
 from rest_framework import serializers
 
-from api.models.static import Country, State
+from api.models.static import Country
 from api.models.company import Company
 
 
