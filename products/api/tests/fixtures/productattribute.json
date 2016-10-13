@@ -1,0 +1,82 @@
+[
+  {
+    "model": "api.productattribute",
+    "pk": 1,
+    "fields": {
+      "value": "Acero",
+      "attribute": 1
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 2,
+    "fields": {
+      "value": "Madera",
+      "attribute": 1
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 3,
+    "fields": {
+      "value": "Gris espacial",
+      "attribute": 2
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 4,
+    "fields": {
+      "value": "Azul",
+      "attribute": 2
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 5,
+    "fields": {
+      "value": "200 kg",
+      "attribute": 3
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 6,
+    "fields": {
+      "value": "100 g",
+      "attribute": 3
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 7,
+    "fields": {
+      "value": "5 m",
+      "attribute": 4
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 8,
+    "fields": {
+      "value": "5 in",
+      "attribute": 4
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 9,
+    "fields": {
+      "value": "20 cm",
+      "attribute": 5
+    }
+  },
+  {
+    "model": "api.productattribute",
+    "pk": 10,
+    "fields": {
+      "value": "3 in",
+      "attribute": 5
+    }
+  }
+]

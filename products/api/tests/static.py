@@ -11,7 +11,7 @@ from api.models import Category
 
 class TestCategory(APITestCase):
     """Category tests."""
-    fixtures = ['category']
+    fixtures = ['api/tests/fixtures/category']
 
     def test_get_categories(self):
         """Return all the categories created."""
