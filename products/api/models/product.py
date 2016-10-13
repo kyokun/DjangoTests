@@ -2,8 +2,6 @@
 """Product models."""
 
 from django.db import models
-from django.db.models import signals
-from django.dispatch import receiver
 
 from api.models import Country, Category
 
@@ -27,7 +25,7 @@ class ProductAttribute(models.Model):
 class Product(models.Model):
     """Product model."""
     name = models.CharField(max_length=64)
-    model = models.CharField(max_length=64)
+    model = models.CharField(max_length=64, blank=True)
     brand = models.CharField(max_length=64)
     price = models.PositiveIntegerField()
     made_in = models.ForeignKey(Country, on_delete=models.CASCADE)
@@ -41,12 +39,13 @@ class ProductExtraInfo(models.Model):
     """Product extra information model"""
     title = models.CharField(max_length=128)
     description = models.TextField()
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='extras')
 
 
 class ProductLogistic(models.Model):
     """Product logistic model."""
-    origin = models.ForeignKey(Country, on_delete=models.CASCADE)
+    origin = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
     quantity = models.IntegerField()
     PERIOD_CHOICES = (
         ('D', 'Day'),
@@ -56,10 +55,5 @@ class ProductLogistic(models.Model):
     )
     period = models.CharField(choices=PERIOD_CHOICES, default='W',
                               max_length=10)
-    product = models.ForeignKey(Product)
-
-
-@receiver(signals.post_save, sender=Product)
-def save_product(sender, instance, update_fields, created, **kwargs):
-    if created:
-        ProductExtraInfo.objects.create(product=instance)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='logistics')
