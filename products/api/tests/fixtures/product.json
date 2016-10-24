@@ -1,0 +1,65 @@
+[
+  {
+    "model": "api.product",
+    "pk": 1,
+    "fields": {
+      "name": "Sportflix",
+      "model": "",
+      "brand": "Ln(Phi)",
+      "price": 200,
+      "made_in": 1,
+      "last_modification": "2016-10-13T18:27:04.693Z",
+      "category": 1,
+      "keywords": [
+        1,
+        2
+      ],
+      "attributes": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 2,
+    "fields": {
+      "name": "Onic",
+      "model": "",
+      "brand": "Ln(Phi)",
+      "price": 200,
+      "made_in": 1,
+      "last_modification": "2016-10-13T18:27:07.926Z",
+      "category": 1,
+      "keywords": [
+        1,
+        2
+      ],
+      "attributes": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 3,
+    "fields": {
+      "name": "Canada",
+      "model": "",
+      "brand": "Ln(Phi)",
+      "price": 200,
+      "made_in": 1,
+      "last_modification": "2016-10-13T18:27:13.676Z",
+      "category": 1,
+      "keywords": [
+        1,
+        2
+      ],
+      "attributes": [
+        1,
+        2
+      ]
+    }
+  }
+]
