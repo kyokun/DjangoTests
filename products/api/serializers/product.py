@@ -64,7 +64,7 @@ class ProductLogisticSerializer(serializers.ModelSerializer):
     """Product logistic serializer."""
     class Meta:
         model = ProductLogistic
-        fields = ('id', 'origin', 'quantity', 'period',)
+        fields = ('origin', 'quantity', 'period',)
         extra_kwargs = {
             'origin': {'write_only': True}
         }

@@ -1,0 +1,11 @@
+[
+  {
+    "model": "api.productextrainfo",
+    "pk": 1,
+    "fields": {
+      "title": "titulo",
+      "description": "descripcion",
+      "product": 3
+    }
+  }
+]
