@@ -1,0 +1,65 @@
+[
+  {
+    "model": "api.company",
+    "pk": 1,
+    "fields": {
+      "business_name": "dw",
+      "website": "",
+      "street": "123",
+      "num_ext": "1",
+      "zip_code": "123",
+      "state": 3,
+      "country": 1,
+      "phone_number": "123",
+      "phone_name": "132",
+      "phone_extension": "213",
+      "phone_country": 1,
+      "industry": 2,
+      "product_categories": []
+    }
+  },
+  {
+    "model": "api.company",
+    "pk": 2,
+    "fields": {
+      "business_name": "dw2",
+      "website": "",
+      "street": "123",
+      "num_ext": "1",
+      "zip_code": "123",
+      "state": 3,
+      "country": 1,
+      "phone_number": "123",
+      "phone_name": "132",
+      "phone_extension": "213",
+      "phone_country": 1,
+      "industry": 2,
+      "product_categories": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "api.company",
+    "pk": 3,
+    "fields": {
+      "business_name": "12",
+      "website": "",
+      "street": "1",
+      "num_ext": "0",
+      "zip_code": "1",
+      "state": 1,
+      "country": 1,
+      "phone_number": "1",
+      "phone_name": "1",
+      "phone_extension": "1",
+      "phone_country": 1,
+      "industry": 1,
+      "product_categories": [
+        1
+      ]
+    }
+  }
+]
